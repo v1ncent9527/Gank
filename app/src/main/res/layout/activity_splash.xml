@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
+
+    <com.v1ncent.io.gank.widget.particle.ParticleView
+        android:id="@+id/splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2E2E2E"
+        pv:pv_background_color="#2E2E2E"
+        pv:pv_host_text="Gank"
+        pv:pv_host_text_size="56sp"
+        pv:pv_particle_text=".io"
+        pv:pv_particle_text_size="28sp"
+        pv:pv_text_color="#FFF" />
+</LinearLayout>
