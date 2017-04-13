@@ -13,4 +13,10 @@
         <attr name="pv_host_text_anim_time" format="integer"></attr>
     </declare-styleable>
 
+    <declare-styleable name="CrystalViewPager">
+        <attr name="ctl_vp_transition" format="enum">
+            <enum name="default_transition" value="0" />
+            <enum name="stack" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

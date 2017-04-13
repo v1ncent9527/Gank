@@ -7,4 +7,15 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
 
+    //tab
+    <color name="tab_1">#94dae4</color>
+    <color name="tab_2">#f1c361</color>
+    <color name="tab_3">#70d1b4</color>
+    <color name="tab_4">#f48578</color>
+    <color name="tab_default">#8c8c8c</color>
+
+    <color name="base_bg">#fcfcfc</color>
+    <color name="line">#e3e3e3</color>
+    <color name="title_text">#646464</color>
+    <color name="gray_1">#bfbfbf</color>
 </resources>

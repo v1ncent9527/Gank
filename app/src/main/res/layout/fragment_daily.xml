@@ -4,9 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <com.v1ncent.io.gank.widget.viewpager.CrystalViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="daily"/>
+        android:overScrollMode="never" />
 
 </LinearLayout>

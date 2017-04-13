@@ -1,13 +1,19 @@
 package com.v1ncent.io.gank.app;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.ColorInt;
+import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.jaeger.library.StatusBarUtil;
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.utils.toast.Toasty;
+import com.v1ncent.io.gank.widget.LoadingDialog;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 
@@ -26,6 +32,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 
     protected BGASwipeBackHelper mSwipeBackHelper;
     private Toast toast;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +69,10 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     }
 
     private void initConfigs() {
+        /**
+         * 取消含有EditText的界面一进来就弹出软键盘
+         */
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     /**
@@ -70,38 +81,26 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
      * @param info
      */
     public void showInfo(String info) {
-        if (toast != null) {
-            toast.show();
-        } else {
-            toast = Toasty.info(getApplicationContext(), info, Toast.LENGTH_SHORT, true);
-            toast.show();
-        }
+        Toasty.info(getApplicationContext(), info, Toast.LENGTH_SHORT, true).show();
     }
 
     /**
      * toast SUCCESS
+     *
      * @param success
      */
     public void showSuccess(String success) {
-        if (toast != null) {
-            toast.show();
-        } else {
-            toast = Toasty.success(getApplicationContext(), success, Toast.LENGTH_SHORT, true);
-            toast.show();
-        }
+        Toasty.success(getApplicationContext(), success, Toast.LENGTH_SHORT, true).show();
     }
 
     /**
      * toast ERROR
+     *
      * @param error
      */
     public void showError(String error) {
-        if (toast != null) {
-            toast.show();
-        } else {
-            toast = Toasty.error(getApplicationContext(), error, Toast.LENGTH_SHORT, true);
-            toast.show();
-        }
+        Toasty.error(getApplicationContext(), error, Toast.LENGTH_SHORT, true).show();
+
     }
 
 
@@ -146,5 +145,74 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
             return;
         }
         mSwipeBackHelper.backward();
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param color
+     * @param statusBarAlpha 透明度
+     */
+    public void setStatusBarColorForSwipeBack(@ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+        StatusBarUtil.setColorForSwipeBack(this, color, statusBarAlpha);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param color
+     * @param statusBarAlpha 透明度
+     */
+    public void setStatusBarColor(@ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+        StatusBarUtil.setColor(this, color, statusBarAlpha);
+    }
+
+    /**
+     * 加载dialog
+     */
+    public void showProgressDialog(String loadMsg) {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog(this, R.style.CustomDialog, loadMsg);
+        }
+        loadingDialog.show();
+    }
+
+    /**
+     * 隐藏dialog
+     */
+    public void hideProgressDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.cancel();
+        }
+    }
+
+    /**
+     * 成功dialog
+     */
+    public void dialogSuccess(String success) {
+        if (loadingDialog != null) {
+            loadingDialog.success(success);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadingDialog.cancel();
+                }
+            }, 1000);
+        }
+    }
+
+    /**
+     * 失败dialog
+     */
+    public void dialogFail(String failed) {
+        if (loadingDialog != null) {
+            loadingDialog.failed(failed);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadingDialog.cancel();
+                }
+            }, 1000);
+        }
     }
 }

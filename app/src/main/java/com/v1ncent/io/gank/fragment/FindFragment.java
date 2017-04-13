@@ -26,7 +26,7 @@ public class FindFragment extends BaseFragment {
     }
 
     private void initView() {
-
+        setStatusBarColor(getResources().getColor(R.color.tab_2), 0);
     }
 
     @Override

@@ -71,10 +71,11 @@ public class IndexActivity extends BaseActivity {
 
     private void initView() {
         NavigationController navigationController = tab.material()
-                .addItem(android.R.drawable.ic_menu_camera, "相机")
-                .addItem(android.R.drawable.ic_menu_compass, "位置")
-                .addItem(android.R.drawable.ic_menu_search, "搜索")
-                .addItem(android.R.drawable.ic_menu_help, "帮助")
+                .addItem(R.mipmap.icon_tabbar_subscription, R.mipmap.icon_tabbar_subscription_active, "首页", getResources().getColor(R.color.tab_1))
+                .addItem(R.mipmap.icon_tabbar_home, R.mipmap.icon_tabbar_home_active, "发现", getResources().getColor(R.color.tab_2))
+                .addItem(R.mipmap.icon_tabbar_notification, R.mipmap.icon_tabbar_notification_active, "关注", getResources().getColor(R.color.tab_3))
+                .addItem(R.mipmap.icon_tabbar_me, R.mipmap.icon_tabbar_me_active, "我的", getResources().getColor(R.color.tab_4))
+                .setDefaultColor(getResources().getColor(R.color.tab_default))
                 .build();
 
         navigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
@@ -84,7 +85,7 @@ public class IndexActivity extends BaseActivity {
                 Logger.i("asd", "onSelected:" + index + "   TAG: " + old);
 
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                //transaction.setCustomAnimations(R.anim.push_up_in,R.anim.push_up_out);
+                transaction.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
                 transaction.replace(R.id.frameLayout, mFragments.get(index));
                 transaction.commit();
             }
@@ -96,6 +97,8 @@ public class IndexActivity extends BaseActivity {
 
             }
         });
+
+//        setStatusBarColor(getResources().getColor(R .color.tab_1),0);
     }
 
 
