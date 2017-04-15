@@ -1,13 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tab_4"
-    android:orientation="vertical">
+    android:background="@color/base_bg">
 
-    <TextView
+    <ScrollView
+        android:id="@+id/me_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="me"/>
+        android:layout_marginTop="?attr/actionBarSize">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:layout_marginTop="@dimen/padding_8"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_100"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+                <com.v1ncent.io.gank.widget.CircleImageView
+                    android:layout_width="@dimen/padding_64"
+                    android:layout_height="@dimen/padding_64"
+                    android:src="@mipmap/head_default"
+                    app:border_color="@color/white"
+                    app:border_width="1dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_16">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="文森特"
+                            android:textColor="@color/title_text"
+                            android:textSize="@dimen/text_15" />
+
+                        <ImageView
+                            android:layout_width="@dimen/img_15"
+                            android:layout_height="@dimen/img_15"
+                            android:layout_marginLeft="@dimen/padding_8"
+                            android:src="@mipmap/edit" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padding_8"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_bg_1px"
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/padding_3"
+                            android:paddingLeft="@dimen/padding_6"
+                            android:paddingRight="@dimen/padding_6"
+                            android:paddingTop="@dimen/padding_3">
+
+                            <ImageView
+                                android:layout_width="@dimen/img_16"
+                                android:layout_height="@dimen/img_16"
+                                android:src="@mipmap/integral" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/padding_4"
+                                android:text="积分 1300"
+                                android:textColor="@color/tab_4"
+                                android:textSize="@dimen/text_13" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/padding_8"
+                            android:background="@drawable/shape_bg_1px"
+                            android:paddingBottom="@dimen/padding_3"
+                            android:paddingLeft="@dimen/padding_6"
+                            android:paddingRight="@dimen/padding_6"
+                            android:paddingTop="@dimen/padding_3"
+                            android:text="积分商城"
+                            android:textColor="@color/tab_4"
+                            android:textSize="@dimen/text_13" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="@dimen/img_18"
+                    android:layout_height="@dimen/img_18"
+                    android:src="@mipmap/enter" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:background="@color/line" />
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/layout_title" />
+</FrameLayout>

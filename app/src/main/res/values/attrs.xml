@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--splash-->
     <declare-styleable name="ParticleView">
         <attr name="pv_host_text" format="string"></attr>
         <attr name="pv_host_text_size" format="dimension"></attr>
@@ -13,10 +14,17 @@
         <attr name="pv_host_text_anim_time" format="integer"></attr>
     </declare-styleable>
 
+    <!--CrystalViewPager-->
     <declare-styleable name="CrystalViewPager">
         <attr name="ctl_vp_transition" format="enum">
             <enum name="default_transition" value="0" />
             <enum name="stack" value="1" />
         </attr>
+    </declare-styleable>
+
+    <!--圆形头像-->
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
     </declare-styleable>
 </resources>

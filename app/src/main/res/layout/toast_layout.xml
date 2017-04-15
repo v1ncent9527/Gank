@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/toast_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp" />
+        android:layout_width="@dimen/img_24"
+        android:layout_height="@dimen/img_24"
+        android:layout_marginEnd="@dimen/padding_8"
+        android:layout_marginRight="@dimen/padding_8" />
 
     <TextView
         android:id="@+id/toast_text"

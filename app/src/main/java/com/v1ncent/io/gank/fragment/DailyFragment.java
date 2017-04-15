@@ -2,7 +2,6 @@ package com.v1ncent.io.gank.fragment;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -70,14 +69,6 @@ public class DailyFragment extends BaseFragment implements ViewPager.OnPageChang
         viewPager.setTransition(CrystalViewPager.Transition.STACK);
         viewPager.setAdapter(dailyPageAdapter);
         viewPager.setOnPageChangeListener(this);
-
-        showProgressDialog("loading");
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-              dialogFail("保存成功！");
-            }
-        },3000);
     }
 
 

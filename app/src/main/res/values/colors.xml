@@ -6,6 +6,7 @@
 
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="white_pressed">#f5f5f5</color>
 
     //tab
     <color name="tab_1">#94dae4</color>
@@ -15,7 +16,12 @@
     <color name="tab_default">#8c8c8c</color>
 
     <color name="base_bg">#fcfcfc</color>
-    <color name="line">#e3e3e3</color>
-    <color name="title_text">#646464</color>
+    <color name="line">#cdcdcd</color>
+    <color name="title_text">#444444</color>
     <color name="gray_1">#bfbfbf</color>
+    <color name="splash_bg">#2E2E2E</color>
+
+    <color name="black_trans_8c">#8c000000</color>
+    <color name="gray_b1">#b1b1b1</color>
+
 </resources>
