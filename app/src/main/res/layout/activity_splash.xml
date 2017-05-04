@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pv="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,4 +17,13 @@
         pv:pv_particle_text="@string/splash"
         pv:pv_particle_text_size="@dimen/splash_text_2"
         pv:pv_text_color="#FFF" />
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/loadingView"
+        android:layout_width="@dimen/img_32"
+        android:layout_height="@dimen/img_32"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/padding_48"
+        android:src="@drawable/amin_pgbar"
+        android:visibility="invisible"/>
+</FrameLayout>

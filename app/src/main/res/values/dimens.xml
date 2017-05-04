@@ -39,6 +39,11 @@
     <dimen name="img_28">28dp</dimen>
     <dimen name="img_29">29dp</dimen>
     <dimen name="img_30">30dp</dimen>
+    <dimen name="img_32">32dp</dimen>
+    <dimen name="img_34">34dp</dimen>
+    <dimen name="img_36">36dp</dimen>
+    <dimen name="img_40">40dp</dimen>
+    <dimen name="img_48">48dp</dimen>
 
     <dimen name="padding_2">2dp</dimen>
     <dimen name="padding_3">3dp</dimen>
@@ -48,9 +53,13 @@
     <dimen name="padding_12">12dp</dimen>
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_48">48dp</dimen>
+    <dimen name="padding_50">50dp</dimen>
+    <dimen name="padding_52">52dp</dimen>
+    <dimen name="padding_54">54dp</dimen>
     <dimen name="padding_60">60dp</dimen>
     <dimen name="padding_64">64dp</dimen>
     <dimen name="padding_80">80dp</dimen>
+    <dimen name="padding_88">88dp</dimen>
     <dimen name="padding_100">100dp</dimen>
 
     <dimen name="bottomtabstrip_height">56dp</dimen>

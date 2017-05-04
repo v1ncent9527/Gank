@@ -1,7 +1,9 @@
 package com.v1ncent.io.gank.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +14,12 @@ import android.widget.TextView;
 
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.app.BaseFragment;
+import com.v1ncent.io.gank.me.activity.SettingActivity;
+import com.v1ncent.io.gank.me.fragment.MeInfoEidtFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
@@ -40,6 +45,8 @@ public class MeFragment extends BaseFragment {
     RelativeLayout title;
     @BindView(R.id.me_root)
     ScrollView meRoot;
+    @BindView(R.id.info_edit)
+    ImageView infoEdit;
 
     @Nullable
     @Override
@@ -47,10 +54,12 @@ public class MeFragment extends BaseFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_me, null);
         ButterKnife.bind(this, view);
         initView();
+        showSuccess("MeFragment");
         return view;
     }
 
     private void initView() {
+        setStatusBarColor(getResources().getColor(R.color.white), 32);
         titleText.setText("我的");
         leftImg.setVisibility(View.GONE);
         rightImg.setImageResource(R.mipmap.icon_settings);
@@ -60,9 +69,20 @@ public class MeFragment extends BaseFragment {
 
     }
 
-    @Override
+    @OnClick({R.id.info_edit, R.id.rightBtn})
     public void onClickListener(View v) {
-
+        switch (v.getId()) {
+            case R.id.info_edit:
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                MeInfoEidtFragment editDialog = new MeInfoEidtFragment();
+                editDialog.show(fm, "MeInfoEidtFragment");
+                break;
+            case R.id.rightBtn:
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_from_left);
+                break;
+        }
     }
 
 
@@ -70,5 +90,6 @@ public class MeFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
     }
+
 
 }

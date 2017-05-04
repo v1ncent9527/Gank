@@ -51,7 +51,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      */
     public void showError(String error) {
         Toasty.error(getActivity().getApplicationContext(), error, Toast.LENGTH_SHORT, true).show();
-
     }
 
     /**

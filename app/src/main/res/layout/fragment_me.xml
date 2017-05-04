@@ -23,6 +23,7 @@
                 android:background="@color/line" />
 
             <LinearLayout
+                android:id="@+id/me_info"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/padding_100"
                 android:background="@drawable/pregress_color"
@@ -60,6 +61,7 @@
                             android:textSize="@dimen/text_15" />
 
                         <ImageView
+                            android:id="@+id/info_edit"
                             android:layout_width="@dimen/img_15"
                             android:layout_height="@dimen/img_15"
                             android:layout_marginLeft="@dimen/padding_8"
@@ -110,6 +112,147 @@
                             android:textSize="@dimen/text_13" />
                     </LinearLayout>
                 </LinearLayout>
+
+                <ImageView
+                    android:layout_width="@dimen/img_18"
+                    android:layout_height="@dimen/img_18"
+                    android:src="@mipmap/enter" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:layout_marginTop="@dimen/padding_12"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+                <ImageView
+                    android:layout_width="@dimen/img_20"
+                    android:layout_height="@dimen/img_20"
+                    android:src="@mipmap/love" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_16"
+                    android:text="@string/my_love"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_8"
+                    android:layout_marginRight="@dimen/padding_8"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="11篇"
+                    android:textColor="@color/gray_9c"
+                    android:textSize="@dimen/text_14" />
+
+                <ImageView
+                    android:layout_width="@dimen/img_18"
+                    android:layout_height="@dimen/img_18"
+                    android:src="@mipmap/enter" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:layout_marginLeft="@dimen/padding_12"
+                android:background="@color/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+                <ImageView
+                    android:layout_width="@dimen/img_20"
+                    android:layout_height="@dimen/img_20"
+                    android:src="@mipmap/collection" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_16"
+                    android:text="@string/collocation"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_8"
+                    android:layout_marginRight="@dimen/padding_8"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="11篇"
+                    android:textColor="@color/gray_9c"
+                    android:textSize="@dimen/text_14" />
+
+                <ImageView
+                    android:layout_width="@dimen/img_18"
+                    android:layout_height="@dimen/img_18"
+                    android:src="@mipmap/enter" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:layout_marginLeft="@dimen/padding_12"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+                <ImageView
+                    android:layout_width="@dimen/img_20"
+                    android:layout_height="@dimen/img_20"
+                    android:src="@mipmap/history" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_16"
+                    android:text="@string/read_history"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_8"
+                    android:layout_marginRight="@dimen/padding_8"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="11篇"
+                    android:textColor="@color/gray_9c"
+                    android:textSize="@dimen/text_14" />
 
                 <ImageView
                     android:layout_width="@dimen/img_18"

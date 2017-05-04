@@ -21,6 +21,8 @@ public class AppApplication extends Application {
     public static Gson gson;
     private static RequestQueue volleyQueue;
     public static int savaY;
+    private static String dailyDate;
+    public static String weather = "对流层，地球";
 
     @Override
     public void onCreate() {
@@ -32,7 +34,9 @@ public class AppApplication extends Application {
         initInfo();
     }
 
+
     private void initInfo() {
+        //注册监听函数
         //Gson初始化
         gson = new Gson();
         //网络请求队列都是整个APP内使用的全局性对象
@@ -65,5 +69,23 @@ public class AppApplication extends Application {
     public static void setSavaY(int savaY) {
         AppApplication.savaY = savaY;
     }
+
+    public static String getDailyDate() {
+        return dailyDate;
+    }
+
+    public static void setDailyDate(String dailyDate) {
+        AppApplication.dailyDate = dailyDate;
+    }
+
+
+    public static String getWeather() {
+        return weather;
+    }
+
+    public static void setWeather(String weather) {
+        AppApplication.weather = weather;
+    }
+
 
 }

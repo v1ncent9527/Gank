@@ -41,11 +41,11 @@ public class HttpClientUtils {
      * tag：当前请求的标签；
      * volleyListenerInterface：VolleyListenerInterface接口；
      */
-//    public static void StringRequestGet(final Context context, final String url, String tag, VolleyListenerInterface volleyListenerInterface) {
-//        // 清除请求队列中的tag标记请求
-//        BaseApplication.getRequestQueue().cancelAll(tag);
-//        // 创建当前的请求，获取字符串内容
-//        stringRequest = new StringRequest(Request.Method.GET, url, volleyListenerInterface.responseListener(), volleyListenerInterface.errorListener()) {
+    public static void StringRequestGet(final Context context, final String url, String tag, VolleyListenerInterface volleyListenerInterface) {
+        // 清除请求队列中的tag标记请求
+        AppApplication.getRequestQueue().cancelAll(tag);
+        // 创建当前的请求，获取字符串内容
+        stringRequest = new StringRequest(Request.Method.GET, url, volleyListenerInterface.responseListener(), volleyListenerInterface.errorListener()) {
 //            @Override
 //            public Map<String, String> getHeaders() throws AuthFailureError {
 //                HashMap<String, String> headers = new HashMap<>();
@@ -62,16 +62,16 @@ public class HttpClientUtils {
 //                headers.put("accesstoken", access_token);
 //                return headers;
 //            }
-//        };
-//        //设置请求超时
-//        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30 * 1000, 1, 1.0f));
-//        // 为当前请求添加标记
-//        stringRequest.setTag(tag);
-//        // 将当前请求添加到请求队列中
-//        BaseApplication.getRequestQueue().add(stringRequest);
-//        // 重启当前请求队列
-//        BaseApplication.getRequestQueue().start();
-//    }
+        };
+        //设置请求超时
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(30 * 1000, 0, 1.0f));
+        // 为当前请求添加标记
+        stringRequest.setTag(tag);
+        // 将当前请求添加到请求队列中
+        AppApplication.getRequestQueue().add(stringRequest);
+        // 重启当前请求队列
+        AppApplication.getRequestQueue().start();
+    }
 
     /**
      * 获取POST请求内容（请求的代码为Map）
@@ -89,7 +89,7 @@ public class HttpClientUtils {
         stringRequest = new StringRequest(Request.Method.POST, url, volleyListenerInterface.responseListener(), volleyListenerInterface.errorListener()) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Log.i("请求参数：" ,params+"");
+                Log.i("请求参数：", params + "");
                 return params;
             }
 

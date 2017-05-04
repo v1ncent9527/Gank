@@ -4,24 +4,29 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 import com.v1ncent.io.gank.R;
+import com.v1ncent.io.gank.utils.EasyPermissions;
 import com.v1ncent.io.gank.utils.toast.Toasty;
 import com.v1ncent.io.gank.widget.LoadingDialog;
 
+import java.util.List;
+
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
+
 
 /**
  * Created by v1ncent on 2017/4/10.
  */
 
-public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener, BGASwipeBackHelper.Delegate {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener, BGASwipeBackHelper.Delegate,EasyPermissions.PermissionCallbacks {
 
     @Override
     public void onClick(View v) {
@@ -33,6 +38,8 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     protected BGASwipeBackHelper mSwipeBackHelper;
     private Toast toast;
     private LoadingDialog loadingDialog;
+    protected static final int RC_PERM = 123;
+    protected static int reSting = R.string.ask_again;//默认提示语句
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +74,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         // 设置触发释放后自动滑动返回的阈值，默认值为 0.3f
         mSwipeBackHelper.setSwipeBackThreshold(0.3f);
     }
+
 
     private void initConfigs() {
         /**
@@ -215,4 +223,74 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
             }, 1000);
         }
     }
+
+
+    //**************** Android M Permission (Android 6.0权限控制代码封装)********//
+    /**
+     * 权限回调接口
+     */
+    private CheckPermListener mListener;
+
+    public interface CheckPermListener {
+        //权限通过后的回调方法
+        void superPermission();
+    }
+
+    public void checkPermission(CheckPermListener listener, int resString, String... mPerms) {
+        mListener = listener;
+        if (EasyPermissions.hasPermissions(this, mPerms)) {
+            if (mListener != null)
+                mListener.superPermission();
+        } else {
+            EasyPermissions.requestPermissions(this, getString(resString),
+                    RC_PERM, mPerms);
+        }
+    }
+
+    /**
+     * 用户权限处理,
+     * 如果全部获取, 则直接过.
+     * 如果权限缺失, 则提示Dialog.
+     *
+     * @param requestCode  请求码
+     * @param permissions  权限
+     * @param grantResults 结果
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == EasyPermissions.SETTINGS_REQ_CODE) {
+//            //设置返回
+//        }
+//    }
+
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        //同意了某些权限可能不是全部
+    }
+
+    @Override
+    public void onPermissionsAllGranted() {
+        if (mListener != null)
+            mListener.superPermission();//同意了全部权限的回调
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+        EasyPermissions.checkDeniedPermissionsNeverAskAgain(this,
+                getString(R.string.perm_tip),
+                R.string.setting, R.string.cancel, null, perms);
+    }
+
+    //********************** END Android M Permission **********************************//
 }

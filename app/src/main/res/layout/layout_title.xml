@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text=""
+        android:maxLines="1"
         android:textColor="@color/title_text"
         android:textSize="@dimen/text_16" />
 
@@ -43,8 +44,8 @@
 
     <ImageView
         android:id="@+id/rightImg"
-        android:layout_width="@dimen/img_20"
-        android:layout_height="@dimen/img_20"
+        android:layout_width="@dimen/img_22"
+        android:layout_height="@dimen/img_22"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/padding_12"

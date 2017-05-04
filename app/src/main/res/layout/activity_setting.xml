@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/setting_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:scrollbarSize="@dimen/padding_3"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_40"
+                android:gravity="bottom"
+                android:paddingBottom="@dimen/padding_4"
+                android:paddingLeft="@dimen/padding_12"
+                android:text="@string/preference_setting"
+                android:textColor="@color/gray_9c"
+                android:textSize="@dimen/text_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:id="@+id/setting_me_info"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+                <ImageView
+                    android:layout_width="@dimen/img_20"
+                    android:layout_height="@dimen/img_20"
+                    android:src="@mipmap/edit" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_16"
+                    android:layout_weight="1"
+                    android:text="@string/personal_data"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_15" />
+
+
+                <ImageView
+                    android:layout_width="@dimen/img_18"
+                    android:layout_height="@dimen/img_18"
+                    android:src="@mipmap/enter" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:layout_marginLeft="@dimen/padding_12"
+                android:background="@color/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+                <ImageView
+                    android:layout_width="@dimen/img_22"
+                    android:layout_height="@dimen/img_22"
+                    android:src="@mipmap/hourglass" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_16"
+                    android:layout_weight="1"
+                    android:text="@string/load_image_mobile"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_15" />
+
+                <com.v1ncent.io.gank.widget.ToggleSwitchView
+                    android:id="@+id/setting_load_image_switch"
+                    android:layout_width="@dimen/padding_48"
+                    android:layout_height="@dimen/img_34"
+                    app:tintColor="@color/tab_4" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:background="@color/line" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_40"
+                android:gravity="bottom"
+                android:paddingBottom="@dimen/padding_4"
+                android:paddingLeft="@dimen/padding_12"
+                android:text="@string/others"
+                android:textColor="@color/gray_9c"
+                android:textSize="@dimen/text_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:id="@+id/setting_clear_cache"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/clear_cache"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_15" />
+
+                <TextView
+                    android:id="@+id/clear_cache_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_8"
+                    android:layout_marginRight="@dimen/padding_8"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="当前缓存100.00Mb"
+                    android:textColor="@color/gray_9c"
+                    android:textSize="@dimen/text_14" />
+
+                <ImageView
+                    android:layout_width="@dimen/img_18"
+                    android:layout_height="@dimen/img_18"
+                    android:src="@mipmap/enter" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:layout_marginLeft="@dimen/padding_12"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:id="@+id/setting_about_us"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/about_us"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_15" />
+
+                <ImageView
+                    android:layout_width="@dimen/img_18"
+                    android:layout_height="@dimen/img_18"
+                    android:src="@mipmap/enter" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:layout_marginTop="@dimen/img_40"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:id="@+id/login_out"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_50"
+                android:background="@drawable/pregress_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingRight="@dimen/padding_12">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="退出当前账号"
+                    android:textColor="@color/tab_4"
+                    android:textSize="@dimen/text_15" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_1px"
+                android:background="@color/line" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/layout_title" />
+
+</FrameLayout>

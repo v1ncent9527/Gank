@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.app.BaseFragment;
 
@@ -22,15 +23,54 @@ public class FindFragment extends BaseFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_find, null);
         ButterKnife.bind(this, view);
         initView();
+        Logger.i("onCreateView");
+        showSuccess("FindFragment");
         return view;
     }
 
     private void initView() {
-        setStatusBarColor(getResources().getColor(R.color.tab_2), 0);
+        setStatusBarColor(getResources().getColor(R.color.white), 32);
     }
 
     @Override
     public void onClickListener(View v) {
 
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            showSuccess("visible");
+            //TODO now visible to user
+        } else {
+            showError("invisible");
+            //TODO now invisible to user
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Logger.i("onResume");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Logger.i("onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Logger.i("onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Logger.i("onDestroy");
     }
 }

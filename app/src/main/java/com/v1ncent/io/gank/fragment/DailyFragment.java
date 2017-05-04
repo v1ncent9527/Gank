@@ -1,19 +1,45 @@
 package com.v1ncent.io.gank.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.v1ncent.io.gank.R;
+import com.v1ncent.io.gank.app.AppApplication;
 import com.v1ncent.io.gank.app.BaseFragment;
-import com.v1ncent.io.gank.daily.adapter.DailyPageAdapter;
-import com.v1ncent.io.gank.widget.viewpager.CrystalViewPager;
+import com.v1ncent.io.gank.app.InitUrl;
+import com.v1ncent.io.gank.daily.DailyDetailsActivity;
+import com.v1ncent.io.gank.daily.adapter.ModuleAndriodAdapter;
+import com.v1ncent.io.gank.daily.adapter.ModuleExpansionAdapter;
+import com.v1ncent.io.gank.daily.adapter.ModuleFrontEndAdapter;
+import com.v1ncent.io.gank.daily.adapter.ModuleIOSAdapter;
+import com.v1ncent.io.gank.daily.adapter.ModuleRecommendAdapter;
+import com.v1ncent.io.gank.daily.adapter.ModuleVideoAdapter;
+import com.v1ncent.io.gank.daily.pojo.DayDateResult;
+import com.v1ncent.io.gank.daily.pojo.HistoryDateResult;
+import com.v1ncent.io.gank.daily.pojo.WeatherResult;
+import com.v1ncent.io.gank.daily.widget.DailyHeader;
+import com.v1ncent.io.gank.utils.DateFormatUtils;
+import com.v1ncent.io.gank.utils.HttpClientUtils;
+import com.v1ncent.io.gank.utils.impl.OnRecyclerViewListener;
+import com.v1ncent.io.gank.utils.impl.VolleyErrorHelper;
+import com.v1ncent.io.gank.utils.impl.VolleyListenerInterface;
+import com.v1ncent.io.gank.widget.loadingview.SlackLoadingView;
+import com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,90 +47,324 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.v1ncent.io.gank.R.id.recycler_android;
+
 /**
  * Created by v1ncent on 2017/4/11.
  */
 
-public class DailyFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
+public class DailyFragment extends BaseFragment {
 
-    private TextView dailyDate;
-    private TextView dailyWeather;
-    @BindView(R.id.viewPager)
-    CrystalViewPager viewPager;
-    private List<View> list_view;
-    private DailyPageAdapter dailyPageAdapter;
+
+    @BindView(R.id.daily_date)
+    TextView dailyDate;
+    @BindView(R.id.daily_weather)
+    TextView dailyWeather;
+    @BindView(R.id.daily_meimei)
+    ImageView dailyMeimei;
+    @BindView(R.id.recycler_ios)
+    RecyclerView recyclerIos;
+    @BindView(R.id.module_ios)
+    LinearLayout moduleIos;
+    @BindView(recycler_android)
+    RecyclerView recyclerAndroid;
+    @BindView(R.id.module_android)
+    LinearLayout moduleAndroid;
+    @BindView(R.id.recycler_front_end)
+    RecyclerView recyclerFrontEnd;
+    @BindView(R.id.module_front_end)
+    LinearLayout moduleFrontEnd;
+    @BindView(R.id.recycle_blind_recommend)
+    RecyclerView recycleBlindRecommend;
+    @BindView(R.id.module_blind_recommend)
+    LinearLayout moduleBlindRecommend;
+    @BindView(R.id.recycle_expansion)
+    RecyclerView recycleExpansion;
+    @BindView(R.id.module_expansion)
+    LinearLayout moduleExpansion;
+    @BindView(R.id.recycle_video)
+    RecyclerView recycleVideo;
+    @BindView(R.id.module_video)
+    LinearLayout moduleVideo;
+    @BindView(R.id.daily_spring_view)
+    SpringView dailySpringView;
+    @BindView(R.id.loadingView)
+    SlackLoadingView loadingView;
+    @BindView(R.id.loadingRoot)
+    RelativeLayout loadingRoot;
+    private String TAG = "DailyFragment";
+    private Context context;
+
+    /*android*/
+    private List<DayDateResult.ResultsBean.AndroidBean> androidList = new ArrayList<>();
+    private ModuleAndriodAdapter andriodAdapter;
+    /*ios*/
+    private List<DayDateResult.ResultsBean.IOSBean> iosList = new ArrayList<>();
+    private ModuleIOSAdapter iosAdapter;
+    /*FrontEnd*/
+    private List<DayDateResult.ResultsBean.前端Bean> frontEndList = new ArrayList<>();
+    private ModuleFrontEndAdapter frontEndAdapter;
+    /*Recommend*/
+    private List<DayDateResult.ResultsBean.瞎推荐Bean> recommendList = new ArrayList<>();
+    private ModuleRecommendAdapter recommendAdapter;
+    /*Expansion*/
+    private List<DayDateResult.ResultsBean.拓展资源Bean> expansionList = new ArrayList<>();
+    private ModuleExpansionAdapter expansionAdapter;
+    /*Video*/
+    private List<DayDateResult.ResultsBean.休息视频Bean> videoList = new ArrayList<>();
+    private ModuleVideoAdapter videoAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_daily, null);
         ButterKnife.bind(this, view);
+        context = getActivity();
+        showSuccess(TAG);
         initView();
+        initData(true);
         return view;
     }
 
     private void initView() {
+        loadingView.start();
+        dailySpringView.setEnable(false);
         setStatusBarColor(getResources().getColor(R.color.white), 32);
-        //这里只设置了4.因为在实现应用中，我们在页面加载的时候，你会根据数据的多少，而知道这个页面的数量
-        //一般情况下，我们会根据list<>或是string[]这样的数组的数量来判断要有多少页
-        list_view = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.daily_page, null);
-            TextView txt_num = (TextView) view.findViewById(R.id.daily_page);
-            dailyDate = (TextView) view.findViewById(R.id.daily_date);
-            dailyWeather = (TextView) view.findViewById(R.id.daily_weather);
 
-            Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "thinfont-thin.ttf"); // create a typeface from the raw ttf
-            dailyDate.setTypeface(typeface); // apply the typeface to the textview
-            dailyDate.setText("2017  /  04  /  04");
+        dailySpringView.setType(SpringView.Type.FOLLOW);
+        dailySpringView.setListener(new SpringView.OnFreshListener() {
+            @Override
+            public void onRefresh() {
+                /*下拉刷新*/
+                HttpClientUtils.StringRequestGet(context, InitUrl.HISTORY_DATE, "date", new VolleyListenerInterface() {
+                    @Override
+                    public void onMySuccess(String result) {
+                        if (null != result) {
+                            Logger.json(result);
+                            HistoryDateResult historyDateResult = AppApplication.gson.fromJson(result, HistoryDateResult.class);
 
-            dailyWeather.setText("多云 天津");
-            txt_num.setText(i + "");
-            if (i % 2 == 0) {
-                txt_num.setBackgroundColor(getResources().getColor(R.color.tab_4));
+                            if (historyDateResult.getResults().size() > 7) {
+                                AppApplication.setDailyDate(historyDateResult.getResults().get(0).replace("-", "/"));
+                                loadWeather();
+                                initData(false);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onMyError(VolleyError error) {
+                        showError(VolleyErrorHelper.getMessage(error, context));
+                    }
+                });
             }
-            list_view.add(view);
+
+            @Override
+            public void onLoadmore() {
+            }
+        });
+        dailySpringView.setHeader(new DailyHeader(getActivity(), R.mipmap.ali));   //参数为：logo图片资源，是否显示文字
+
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "thinfont-thin.ttf"); // create a typeface from the raw ttf
+        dailyDate.setTypeface(typeface); // apply the typeface to the textview
+        dailyDate.setText(DateFormatUtils.getTodayDate().replace("/", "  /  "));
+        dailyWeather.setText(AppApplication.getWeather());
+    }
+
+    /*获取天气信息*/
+    private void loadWeather() {
+        HttpClientUtils.StringRequestGet(context, InitUrl.GET_WEATHER, "weather", new VolleyListenerInterface() {
+            @Override
+            public void onMySuccess(String result) {
+                if (null != result) {
+                    Logger.json(result);
+                    WeatherResult weatherResult = AppApplication.gson.fromJson(result, WeatherResult.class);
+                    dailyWeather.setText(weatherResult.getResults().get(0).getNow().getText()
+                            + "，" + weatherResult.getResults().get(0).getLocation().getName());
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                Logger.i(VolleyErrorHelper.getMessage(error, context));
+            }
+        });
+    }
+
+
+    /*加载干货详情*/
+    private void initData(boolean isshowInfo) {
+        if (!DateFormatUtils.getTodayDate().equals(AppApplication.getDailyDate())
+                && isshowInfo) {
+            showInfo("今天的干货还没更新吆^_^");
         }
-        dailyPageAdapter = new DailyPageAdapter(list_view);
-        viewPager.setTransition(CrystalViewPager.Transition.STACK);
-        viewPager.setAdapter(dailyPageAdapter);
-        viewPager.setOnPageChangeListener(this);
+        String url = InitUrl.BASE_URL + AppApplication.getDailyDate();
+        HttpClientUtils.StringRequestGet(context, url, TAG, new VolleyListenerInterface() {
+            @Override
+            public void onMySuccess(String result) {
+                dailySpringView.onFinishFreshAndLoad();
+                loadingRoot.setVisibility(View.GONE);
+                loadingView.reset();
+                dailySpringView.setEnable(true);
+                if (null != result) {
+//                    Logger.json(result);
+                    DayDateResult dayDateResult = AppApplication.gson.fromJson(result, DayDateResult.class);
+
+                    Glide
+                            .with(context)
+                            .load(dayDateResult.getResults().get福利().get(0).getUrl())
+                            .placeholder(R.color.white)
+                            .error(R.mipmap.img_load_error)
+                            .into(dailyMeimei);
+                    /*android*/
+                    if (null != dayDateResult.getResults().getAndroid()
+                            && dayDateResult.getResults().getAndroid().size() > 0) {
+                        androidList.clear();
+                        androidList.addAll(dayDateResult.getResults().getAndroid());
+                        recyclerAndroid.setLayoutManager(new LinearLayoutManager(context));
+                        andriodAdapter = new ModuleAndriodAdapter(context, androidList);
+                        recyclerAndroid.setAdapter(andriodAdapter);
+                        andriodAdapter.addItemClickListener(new OnRecyclerViewListener() {
+                            @Override
+                            public void onItemClickListener(int position) {
+                                intoDetails(androidList.get(position).getUrl());
+                            }
+
+                            @Override
+                            public void onItemViewClickListener(int position) {
+
+                            }
+                        });
+                        moduleAndroid.setVisibility(View.VISIBLE);
+                    }
+
+                     /*ios*/
+                    if (null != dayDateResult.getResults().getIOS()
+                            && dayDateResult.getResults().getIOS().size() > 0) {
+                        iosList.clear();
+                        iosList.addAll(dayDateResult.getResults().getIOS());
+                        recyclerIos.setLayoutManager(new LinearLayoutManager(context));
+                        iosAdapter = new ModuleIOSAdapter(context, iosList);
+                        recyclerIos.setAdapter(iosAdapter);
+                        iosAdapter.addItemClickListener(new OnRecyclerViewListener() {
+                            @Override
+                            public void onItemClickListener(int position) {
+                                intoDetails(iosList.get(position).getUrl());
+                            }
+
+                            @Override
+                            public void onItemViewClickListener(int position) {
+
+                            }
+                        });
+                        moduleIos.setVisibility(View.VISIBLE);
+                    }
+
+                     /*FrontEnd*/
+                    if (null != dayDateResult.getResults().get前端()
+                            && dayDateResult.getResults().get前端().size() > 0) {
+                        frontEndList.clear();
+                        frontEndList.addAll(dayDateResult.getResults().get前端());
+                        recyclerFrontEnd.setLayoutManager(new LinearLayoutManager(context));
+                        frontEndAdapter = new ModuleFrontEndAdapter(context, frontEndList);
+                        recyclerFrontEnd.setAdapter(frontEndAdapter);
+                        frontEndAdapter.addItemClickListener(new OnRecyclerViewListener() {
+                            @Override
+                            public void onItemClickListener(int position) {
+                                intoDetails(frontEndList.get(position).getUrl());
+                            }
+
+                            @Override
+                            public void onItemViewClickListener(int position) {
+
+                            }
+                        });
+                        moduleFrontEnd.setVisibility(View.VISIBLE);
+                    }
+
+                     /*Recommend*/
+                    if (null != dayDateResult.getResults().get瞎推荐()
+                            && dayDateResult.getResults().get瞎推荐().size() > 0) {
+                        recommendList.clear();
+                        recommendList.addAll(dayDateResult.getResults().get瞎推荐());
+                        recycleBlindRecommend.setLayoutManager(new LinearLayoutManager(context));
+                        recommendAdapter = new ModuleRecommendAdapter(context, recommendList);
+                        recycleBlindRecommend.setAdapter(recommendAdapter);
+                        recommendAdapter.addItemClickListener(new OnRecyclerViewListener() {
+                            @Override
+                            public void onItemClickListener(int position) {
+                                intoDetails(recommendList.get(position).getUrl());
+                            }
+
+                            @Override
+                            public void onItemViewClickListener(int position) {
+
+                            }
+                        });
+                        moduleBlindRecommend.setVisibility(View.VISIBLE);
+                    }
+
+                     /*Expansion*/
+                    if (null != dayDateResult.getResults().get拓展资源()
+                            && dayDateResult.getResults().get拓展资源().size() > 0) {
+                        expansionList.clear();
+                        expansionList.addAll(dayDateResult.getResults().get拓展资源());
+                        recycleExpansion.setLayoutManager(new LinearLayoutManager(context));
+                        expansionAdapter = new ModuleExpansionAdapter(context, expansionList);
+                        recycleExpansion.setAdapter(expansionAdapter);
+                        expansionAdapter.addItemClickListener(new OnRecyclerViewListener() {
+                            @Override
+                            public void onItemClickListener(int position) {
+                                intoDetails(expansionList.get(position).getUrl());
+                            }
+
+                            @Override
+                            public void onItemViewClickListener(int position) {
+
+                            }
+                        });
+                        moduleExpansion.setVisibility(View.VISIBLE);
+                    }
+
+                     /*Video*/
+                    if (null != dayDateResult.getResults().get休息视频()
+                            && dayDateResult.getResults().get休息视频().size() > 0) {
+                        videoList.clear();
+                        videoList.addAll(dayDateResult.getResults().get休息视频());
+                        recycleVideo.setLayoutManager(new LinearLayoutManager(context));
+                        videoAdapter = new ModuleVideoAdapter(context, videoList);
+                        recycleVideo.setAdapter(videoAdapter);
+                        videoAdapter.addItemClickListener(new OnRecyclerViewListener() {
+                            @Override
+                            public void onItemClickListener(int position) {
+                                intoDetails(videoList.get(position).getUrl());
+                            }
+
+                            @Override
+                            public void onItemViewClickListener(int position) {
+
+                            }
+                        });
+                        moduleVideo.setVisibility(View.VISIBLE);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                loadingRoot.setVisibility(View.GONE);
+                dailySpringView.onFinishFreshAndLoad();
+                showError(VolleyErrorHelper.getMessage(error, context));
+            }
+        });
     }
 
-
-    /**
-     * arg0 :当前页面，及你点击滑动的页面
-     * arg1 :当前页面偏移的百分比
-     * arg2 :当前页面偏移的像素位置
-     * (int, float, int) pagerNum:第几个界面（从0开始计数） offset:偏移量，计算页面滑动的距离
-     */
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+    private void intoDetails(String url) {
+        Intent intent = new Intent(getActivity(), DailyDetailsActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.in_from_right, R.anim.out_from_left);
     }
-
-    /**
-     * (int) 判断当前是哪个view
-     */
-    @Override
-    public void onPageSelected(int position) {
-        Logger.i(String.valueOf(position));
-        showInfo(position + "we");
-    }
-
-    /**
-     * onPageScrollStateChanged(int) 此方法是在状态改变的时候调用，其中arg0这个参数
-     * 有三种状态（0，1，2）。
-     * arg0 == 1的时辰默示正在滑动，
-     * arg0 == 2的时辰默示滑动完毕了，
-     * arg0 == 0的时辰默示什么都没做。
-     * 当页面开始滑动的时候，三种状态的变化顺序为（1，2，0），演示如下：
-     */
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
 
     @Override
     public void onClickListener(View v) {

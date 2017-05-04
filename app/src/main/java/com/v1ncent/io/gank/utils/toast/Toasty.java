@@ -56,6 +56,8 @@ public class Toasty {
     private static final String TOAST_TYPEFACE = "sans-serif-condensed";
     static Toast currentToast;
     static TextView toastTextView;
+    static ImageView toastIcon;
+    static View toastLayout;
 
     private Toasty() {
     }
@@ -195,9 +197,9 @@ public class Toasty {
          */
         if (currentToast == null) {
             currentToast = new Toast(context);
-            final View toastLayout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+            toastLayout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                     .inflate(R.layout.toast_layout, null);
-            final ImageView toastIcon = (ImageView) toastLayout.findViewById(R.id.toast_icon);
+            toastIcon = (ImageView) toastLayout.findViewById(R.id.toast_icon);
             toastTextView = (TextView) toastLayout.findViewById(R.id.toast_text);
             Drawable drawableFrame;
 
@@ -221,7 +223,26 @@ public class Toasty {
             currentToast.setView(toastLayout);
             currentToast.setDuration(duration);
         } else {
+            Drawable drawableFrame;
+            if (shouldTint)
+                drawableFrame = ToastyUtils.tint9PatchDrawableFrame(context, tintColor);
+            else
+                drawableFrame = ToastyUtils.getDrawable(context, R.mipmap.toast_frame);
+            ToastyUtils.setBackground(toastLayout, drawableFrame);
+
+            if (withIcon) {
+                if (icon == null)
+                    throw new IllegalArgumentException("Avoid passing 'icon' as null if 'withIcon' is set to true");
+                ToastyUtils.setBackground(toastIcon, icon);
+            } else
+                toastIcon.setVisibility(View.GONE);
+
+            toastTextView.setTextColor(textColor);
             toastTextView.setText(message);
+            toastTextView.setTypeface(Typeface.create(TOAST_TYPEFACE, Typeface.NORMAL));
+
+            currentToast.setView(toastLayout);
+            currentToast.setDuration(duration);
         }
 
         return currentToast;
