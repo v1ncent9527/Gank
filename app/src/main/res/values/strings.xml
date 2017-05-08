@@ -44,5 +44,9 @@
     <string name="module_blind_recommend">瞎推荐</string>
     <string name="module_video">休息视频</string>
     <string name="module_expansion">拓展资源</string>
+    <string name="pupop_collect">收藏</string>
+    <string name="pupop_share">分享</string>
+    <string name="pupop_link">复制链接</string>
+    <string name="pupop_web">浏览器打开</string>
 
 </resources>

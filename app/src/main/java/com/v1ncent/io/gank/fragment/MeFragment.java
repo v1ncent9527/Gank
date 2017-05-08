@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.app.BaseFragment;
-import com.v1ncent.io.gank.me.activity.SettingActivity;
+import com.v1ncent.io.gank.me.SettingActivity;
 import com.v1ncent.io.gank.me.fragment.MeInfoEidtFragment;
 
 import butterknife.BindView;

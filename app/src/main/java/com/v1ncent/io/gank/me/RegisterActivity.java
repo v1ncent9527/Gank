@@ -1,4 +1,4 @@
-package com.v1ncent.io.gank.me.activity;
+package com.v1ncent.io.gank.me;
 
 import android.view.View;
 
@@ -6,10 +6,10 @@ import com.v1ncent.io.gank.app.BaseActivity;
 
 /**
  * Created by v1ncent on 2017/4/13.
- * 登录
+ * 注册
  */
 
-public class LoginActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity{
     @Override
     public void onClickListener(View v) {
 

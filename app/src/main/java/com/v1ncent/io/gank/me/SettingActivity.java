@@ -1,4 +1,4 @@
-package com.v1ncent.io.gank.me.activity;
+package com.v1ncent.io.gank.me;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +13,7 @@ import com.orhanobut.logger.Logger;
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.app.BaseActivity;
 import com.v1ncent.io.gank.widget.ToggleSwitchView;
+import com.v1ncent.io.gank.widget.dialog.CustomBaseDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,11 +54,15 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.title)
     RelativeLayout title;
 
+    private SettingActivity context;
+    private CustomBaseDialog dialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
+        context = this;
         Logger.i("onCreate");
         initView();
     }
@@ -69,12 +74,24 @@ public class SettingActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.leftBtn)
+    @OnClick({R.id.leftBtn, R.id.login_out})
     public void onClickListener(View v) {
         switch (v.getId()) {
             case R.id.leftBtn:
                 finish();
                 overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
+                break;
+            case R.id.login_out:
+                dialog = new CustomBaseDialog(context);
+                dialog.show();
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.getExitBtn().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+                        showSuccess("LoginOut!");
+                    }
+                });
                 break;
         }
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceError;
@@ -14,6 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.v1ncent.io.gank.R;
 
 /**
@@ -77,8 +79,10 @@ public class LoadingWebView extends WebView {
                 return true;
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                Logger.i(error.getErrorCode() + "\n" + error.getDescription());
                 Toast.makeText(getContext(), "页面加载好像出现了问题￣へ￣", Toast.LENGTH_SHORT).show();
             }
 

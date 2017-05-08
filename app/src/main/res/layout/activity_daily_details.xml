@@ -1,19 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/base_bg"
-    android:orientation="vertical"
-    android:overScrollMode="never"
-    tools:context="com.v1ncent.io.gank.daily.DailyDetailsActivity">
+    android:background="@color/base_bg">
+
+
+    <com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView
+
+        android:id="@+id/web_spring"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_weight="1"
+        android:background="#797a7d"
+        app:header="@layout/header_web"
+        app:type="overlap">
+
+        <com.v1ncent.io.gank.ui.LoadingWebView
+            android:id="@+id/details_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/padding_48"
+            android:overScrollMode="never"></com.v1ncent.io.gank.ui.LoadingWebView>
+    </com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView>
 
     <include layout="@layout/layout_title" />
 
-
-    <com.v1ncent.io.gank.ui.LoadingWebView
-        android:id="@+id/details_webview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.v1ncent.io.gank.ui.LoadingWebView>
-</LinearLayout>
+        android:layout_height="@dimen/padding_48"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_1px"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_12">
+
+            <ImageView
+                android:id="@+id/is_love"
+                android:layout_width="@dimen/img_24"
+                android:layout_height="@dimen/img_24"
+                android:src="@mipmap/love_off" />
+
+            <ImageView
+                android:id="@+id/share_out"
+                android:layout_width="@dimen/img_24"
+                android:layout_height="@dimen/img_24"
+                android:layout_marginLeft="@dimen/img_24"
+                android:src="@mipmap/share_out" />
+
+            <TextView
+                android:id="@+id/love_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="@dimen/padding_16"
+                android:text="喜欢166"
+                android:textColor="@color/gray_8a"
+                android:textSize="@dimen/text_13" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

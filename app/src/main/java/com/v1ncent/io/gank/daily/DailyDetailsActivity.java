@@ -1,9 +1,13 @@
 package com.v1ncent.io.gank.daily;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.widget.ImageView;
@@ -13,7 +17,12 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.app.BaseActivity;
+import com.v1ncent.io.gank.daily.widget.WebHeader;
 import com.v1ncent.io.gank.ui.LoadingWebView;
+import com.v1ncent.io.gank.widget.popup.CustomBubblePopup;
+import com.v1ncent.io.gank.widget.popup.amin.AnimEnter;
+import com.v1ncent.io.gank.widget.popup.amin.AnimExit;
+import com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,8 +49,20 @@ public class DailyDetailsActivity extends BaseActivity {
     RelativeLayout title;
     @BindView(R.id.details_webview)
     LoadingWebView detailsWebview;
+    @BindView(R.id.web_spring)
+    SpringView webSpring;
+    @BindView(R.id.is_love)
+    ImageView isLove;
+    @BindView(R.id.share_out)
+    ImageView shareOut;
+    @BindView(R.id.love_num)
+    TextView loveNum;
 
     private String url;
+    private DailyDetailsActivity mContext;
+    private static DailyDetailsHandler handler;
+    private CustomBubblePopup customBubblePopup;
+    private boolean isLoveorN = false;
     /**
      * 网页缓存目录
      */
@@ -60,6 +81,7 @@ public class DailyDetailsActivity extends BaseActivity {
         initView();
     }
 
+    /*webview相关配置*/
     private void initWebViewSetting() {
         WebSettings setting = detailsWebview.getSettings();
 
@@ -82,13 +104,20 @@ public class DailyDetailsActivity extends BaseActivity {
         setStatusBarColor(getResources().getColor(R.color.white), 32);
 
         titleText.setText("干货详情");
+        rightImg.setImageResource(R.mipmap.details_menu_big);
+        rightImg.setVisibility(View.VISIBLE);
 
         detailsWebview.addProgressBar();
         detailsWebview.loadMessageUrl(url);
 
+        if (handler == null) {
+            handler = new DailyDetailsHandler();
+        }
+
+        webSpring.setHeader(new WebHeader(mContext, url));
     }
 
-    @OnClick(R.id.leftBtn)
+    @OnClick({R.id.leftBtn, R.id.rightBtn, R.id.is_love, R.id.share_out})
     public void onClickListener(View v) {
         switch (v.getId()) {
             case R.id.leftBtn:
@@ -99,6 +128,58 @@ public class DailyDetailsActivity extends BaseActivity {
                     overridePendingTransition(R.anim.in_from_left, R.anim.out_from_right);
                 }
                 break;
+            case R.id.rightBtn:
+                customBubblePopup = new CustomBubblePopup(this);
+                customBubblePopup
+                        .gravity(Gravity.BOTTOM)
+                        .anchorView(rightImg)
+                        .bubbleColor(Color.parseColor("#646464"))
+                        .triangleWidth(15)
+                        .triangleHeight(10)
+                        .showAnim(new AnimEnter())
+                        .dismissAnim(new AnimExit())
+                        .show();
+                break;
+
+            case R.id.is_love:
+                if (isLoveorN) {
+                    isLove.setImageResource(R.mipmap.love_off);
+                    isLoveorN = false;
+                } else {
+                    isLove.setImageResource(R.mipmap.love_on);
+                    isLoveorN = true;
+                }
+                break;
+            case R.id.share_out:
+                break;
+        }
+    }
+
+    public static void sendMessage(Message msg) {
+        handler.sendMessage(msg);
+    }
+
+    public class DailyDetailsHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            Logger.i(String.valueOf(msg.what));
+            switch (msg.what) {
+                case 0:
+                    showSuccess("PUPOP_COLLECT");
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    break;
+
+            }
+            customBubblePopup.cancel();
         }
     }
 
@@ -119,4 +200,6 @@ public class DailyDetailsActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
+
+
 }

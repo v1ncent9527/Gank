@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.daily.pojo.DayDateResult;
+import com.v1ncent.io.gank.utils.OnClickUtils;
 import com.v1ncent.io.gank.utils.impl.OnRecyclerViewListener;
 import com.v1ncent.io.gank.widget.CircleImageView;
 
@@ -109,6 +110,9 @@ public class ModuleIOSAdapter extends RecyclerView.Adapter<ModuleIOSAdapter.Modu
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.item_module_parent:
+                    if (OnClickUtils.isFastDoubleClick()) {
+                        return;
+                    }
                     listener.onItemClickListener(position);
                     break;
             }

@@ -73,7 +73,6 @@ public class IndexActivity extends BaseActivity {
                 .addItem(R.mipmap.icon_tabbar_me, R.mipmap.icon_tabbar_me_active, "我的", getResources().getColor(R.color.tab_4))
                 .setDefaultColor(getResources().getColor(R.color.tab_default))
                 .build();
-
         navigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
             @Override
             public void onSelected(int index, int old) {
