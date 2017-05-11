@@ -17,39 +17,38 @@ import butterknife.ButterKnife;
  */
 
 public class FindFragment extends BaseFragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_find, null);
         ButterKnife.bind(this, view);
         initView();
-        Logger.i("onCreateView");
-        showSuccess("FindFragment");
+
         return view;
     }
 
     private void initView() {
-        setStatusBarColor(getResources().getColor(R.color.white), 32);
+        setStatusBarColor(getResources().getColor(R.color.tab_2));
     }
+
 
     @Override
     public void onClickListener(View v) {
 
     }
 
-
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden){
-            showSuccess("visible");
+        if (!hidden) {
+            setStatusBarColor(getResources().getColor(R.color.tab_2));
             //TODO now visible to user
         } else {
-            showError("invisible");
             //TODO now invisible to user
         }
     }
-
+//
     @Override
     public void onResume() {
         super.onResume();
@@ -73,4 +72,6 @@ public class FindFragment extends BaseFragment {
         super.onDestroy();
         Logger.i("onDestroy");
     }
+
+
 }

@@ -59,14 +59,25 @@ public class MeFragment extends BaseFragment {
     }
 
     private void initView() {
-        setStatusBarColor(getResources().getColor(R.color.white), 32);
+        setStatusBarColor(getResources().getColor(R.color.tab_4));
         titleText.setText("我的");
         leftImg.setVisibility(View.GONE);
-        rightImg.setImageResource(R.mipmap.icon_settings);
+        rightImg.setImageResource(R.mipmap.title_setting);
         rightImg.setVisibility(View.VISIBLE);
 
         OverScrollDecoratorHelper.setUpOverScroll(meRoot);//设置滑动
 
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            setStatusBarColor(getResources().getColor(R.color.tab_4));
+            //TODO now visible to user
+        } else {
+            //TODO now invisible to user
+        }
     }
 
     @OnClick({R.id.info_edit, R.id.rightBtn})

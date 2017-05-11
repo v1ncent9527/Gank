@@ -27,7 +27,18 @@ public class FollowFragment extends BaseFragment {
     }
 
     private void initView() {
-        setStatusBarColor(getResources().getColor(R.color.white), 32);
+        setStatusBarColor(getResources().getColor(R.color.tab_3));
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            setStatusBarColor(getResources().getColor(R.color.tab_3));
+            //TODO now visible to user
+        } else {
+            //TODO now invisible to user
+        }
     }
 
     @Override

@@ -4,14 +4,14 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
@@ -19,14 +19,15 @@ import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.app.BaseActivity;
 import com.v1ncent.io.gank.daily.widget.WebHeader;
 import com.v1ncent.io.gank.ui.LoadingWebView;
-import com.v1ncent.io.gank.widget.popup.CustomBubblePopup;
 import com.v1ncent.io.gank.widget.popup.amin.AnimEnter;
 import com.v1ncent.io.gank.widget.popup.amin.AnimExit;
+import com.v1ncent.io.gank.widget.popup.v1ncentPupop;
 import com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 /**
  * Created by v1ncent on 2017/5/4.
@@ -60,9 +61,15 @@ public class DailyDetailsActivity extends BaseActivity {
 
     private String url;
     private DailyDetailsActivity mContext;
-    private static DailyDetailsHandler handler;
-    private CustomBubblePopup customBubblePopup;
     private boolean isLoveorN = false;
+    private View menuPupop;
+    private v1ncentPupop pupop;
+    private LinearLayout pupopCollect;
+    private LinearLayout pupopShare;
+    private LinearLayout pupopLink;
+    private LinearLayout pupopWeb;
+    private LinearLayout pupopRefresh;
+    private ScrollView pupopRoot;
     /**
      * 网页缓存目录
      */
@@ -74,6 +81,7 @@ public class DailyDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_details);
         ButterKnife.bind(this);
+        mContext = this;
         url = getIntent().getStringExtra("url");
         Logger.i(url);
 
@@ -101,22 +109,19 @@ public class DailyDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
-        setStatusBarColor(getResources().getColor(R.color.white), 32);
+        setStatusBarColor(getResources().getColor(R.color.tab_1));
 
+        title.setBackgroundColor(getResources().getColor(R.color.tab_1));
         titleText.setText("干货详情");
-        rightImg.setImageResource(R.mipmap.details_menu_big);
+        rightImg.setImageResource(R.mipmap.title_more);
         rightImg.setVisibility(View.VISIBLE);
 
         detailsWebview.addProgressBar();
         detailsWebview.loadMessageUrl(url);
 
-        if (handler == null) {
-            handler = new DailyDetailsHandler();
-        }
-
         webSpring.setHeader(new WebHeader(mContext, url));
     }
-
+    @Nullable
     @OnClick({R.id.leftBtn, R.id.rightBtn, R.id.is_love, R.id.share_out})
     public void onClickListener(View v) {
         switch (v.getId()) {
@@ -129,16 +134,31 @@ public class DailyDetailsActivity extends BaseActivity {
                 }
                 break;
             case R.id.rightBtn:
-                customBubblePopup = new CustomBubblePopup(this);
-                customBubblePopup
+                menuPupop = View.inflate(mContext, R.layout.pupop_gank_details, null);
+                pupopCollect = (LinearLayout) menuPupop.findViewById(R.id.pupop_collect);
+                pupopShare = (LinearLayout) menuPupop.findViewById(R.id.pupop_share);
+                pupopLink = (LinearLayout) menuPupop.findViewById(R.id.pupop_link);
+                pupopWeb = (LinearLayout) menuPupop.findViewById(R.id.pupop_web);
+                pupopRefresh = (LinearLayout) menuPupop.findViewById(R.id.pupop_refresh);
+                pupopRoot = (ScrollView) menuPupop.findViewById(R.id.pupop_root);
+
+                pupop = new v1ncentPupop(mContext, menuPupop)
                         .gravity(Gravity.BOTTOM)
                         .anchorView(rightImg)
                         .bubbleColor(Color.parseColor("#646464"))
                         .triangleWidth(15)
                         .triangleHeight(10)
                         .showAnim(new AnimEnter())
-                        .dismissAnim(new AnimExit())
-                        .show();
+                        .dismissAnim(new AnimExit());
+                pupop.show();
+                pupopCollect.setOnClickListener(mContext);
+                pupopShare.setOnClickListener(mContext);
+                pupopLink.setOnClickListener(mContext);
+                pupopWeb.setOnClickListener(mContext);
+                pupopRefresh.setOnClickListener(mContext);
+
+                OverScrollDecoratorHelper.setUpOverScroll(pupopRoot);//设置滑动
+
                 break;
 
             case R.id.is_love:
@@ -151,37 +171,30 @@ public class DailyDetailsActivity extends BaseActivity {
                 }
                 break;
             case R.id.share_out:
+
+                pupop.dismiss();
                 break;
+            case R.id.pupop_collect:
+                pupop.dismiss();
+                break;
+            case R.id.pupop_share:
+                pupop.dismiss();
+                break;
+            case R.id.pupop_link:
+                pupop.dismiss();
+                break;
+            case R.id.pupop_web:
+                pupop.dismiss();
+                break;
+            case R.id.pupop_refresh:
+                detailsWebview.reload();
+                pupop.dismiss();
+                break;
+
         }
+
     }
 
-    public static void sendMessage(Message msg) {
-        handler.sendMessage(msg);
-    }
-
-    public class DailyDetailsHandler extends Handler {
-
-        @Override
-        public void handleMessage(Message msg) {
-            Logger.i(String.valueOf(msg.what));
-            switch (msg.what) {
-                case 0:
-                    showSuccess("PUPOP_COLLECT");
-                    break;
-
-                case 1:
-                    break;
-
-                case 2:
-                    break;
-
-                case 3:
-                    break;
-
-            }
-            customBubblePopup.cancel();
-        }
-    }
 
     @Override
     public void onDestroy() {
@@ -200,6 +213,5 @@ public class DailyDetailsActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
-
 
 }

@@ -10,7 +10,7 @@
         android:id="@+id/setting_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginTop="@dimen/padding_54"
         android:scrollbarSize="@dimen/padding_3"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"

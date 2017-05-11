@@ -1,69 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/title"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/white">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/leftImg"
-        android:layout_width="@dimen/img_16"
-        android:layout_height="@dimen/img_16"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/padding_12"
-        android:src="@drawable/back_selector" />
-
-    <View
-        android:id="@+id/leftBtn"
-        android:layout_width="@dimen/padding_60"
-        android:layout_height="match_parent" />
-
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text=""
-        android:maxLines="1"
-        android:textColor="@color/title_text"
-        android:textSize="@dimen/text_16" />
-
-    <TextView
-        android:id="@+id/rightText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/padding_8"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/tab_4"
-        android:textSize="@dimen/text_14"
-        android:visibility="invisible" />
-
-
-    <ImageView
-        android:id="@+id/rightImg"
-        android:layout_width="@dimen/img_22"
-        android:layout_height="@dimen/img_22"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/padding_12"
-        android:src="@mipmap/icon_settings"
-        android:visibility="invisible" />
-
-
-    <View
-        android:id="@+id/rightBtn"
-        android:layout_width="@dimen/padding_60"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:visibility="visible" />
-
-    <View
+    <RelativeLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/line_1px"
-        android:layout_alignParentBottom="true"
-        android:background="@color/line" />
+        android:layout_height="@dimen/bottomtabstrip_height"
+        android:background="@color/tab_4">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/leftImg"
+            android:layout_width="@dimen/img_16"
+            android:layout_height="@dimen/img_16"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/padding_12"
+            android:src="@mipmap/ic_back" />
+
+        <View
+            android:id="@+id/leftBtn"
+            android:layout_width="@dimen/padding_60"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:id="@+id/rightText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/padding_8"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/tab_4"
+            android:textSize="@dimen/text_14"
+            android:visibility="invisible" />
+
+
+        <ImageView
+            android:id="@+id/rightImg"
+            android:layout_width="@dimen/img_22"
+            android:layout_height="@dimen/img_22"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/padding_12"
+            android:src="@mipmap/title_setting"
+            android:visibility="invisible" />
+
+
+        <View
+            android:id="@+id/rightBtn"
+            android:layout_width="@dimen/padding_60"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+</LinearLayout>

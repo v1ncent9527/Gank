@@ -2,6 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="actionBarSize">66dp</dimen>
 
     <dimen name="line_1dp">1dp</dimen>
     <dimen name="line_1px">1px</dimen>
@@ -51,6 +52,7 @@
     <dimen name="padding_5">5dp</dimen>
     <dimen name="padding_6">6dp</dimen>
     <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
     <dimen name="padding_12">12dp</dimen>
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_48">48dp</dimen>
@@ -59,13 +61,15 @@
     <dimen name="padding_54">54dp</dimen>
     <dimen name="padding_60">60dp</dimen>
     <dimen name="padding_64">64dp</dimen>
+    <dimen name="padding_70">70dp</dimen>
     <dimen name="padding_80">80dp</dimen>
     <dimen name="padding_88">88dp</dimen>
     <dimen name="padding_100">100dp</dimen>
 
-    <dimen name="bottomtabstrip_height">56dp</dimen>
+    <dimen name="bottomtabstrip_height">54dp</dimen>
     <dimen name="elevation">8dp</dimen>
     <dimen name="width_124">124dp</dimen>
+    <dimen name="width_196">196dp</dimen>
 
 
     <dimen name="splash_text_1">56dp</dimen>

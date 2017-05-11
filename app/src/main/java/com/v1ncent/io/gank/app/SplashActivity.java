@@ -63,8 +63,8 @@ public class SplashActivity extends BaseActivity {
             }
         });
 
-
     }
+
 
     private void initDate() {
         /*获取当日服务器最新日期*/
@@ -100,6 +100,8 @@ public class SplashActivity extends BaseActivity {
                     AppApplication.setWeather(weatherResult.getResults().get(0).getNow().getText()
                             + "，" + weatherResult.getResults().get(0).getLocation().getName());
                     mSwipeBackHelper.forwardAndFinish(IndexActivity.class);
+//                    mSwipeBackHelper.forwardAndFinish(TabMainActivity.class);
+
                 }
             }
 
@@ -107,6 +109,8 @@ public class SplashActivity extends BaseActivity {
             public void onMyError(VolleyError error) {
                 Logger.i(VolleyErrorHelper.getMessage(error, context));
                 mSwipeBackHelper.forwardAndFinish(IndexActivity.class);
+//                mSwipeBackHelper.forwardAndFinish(TabMainActivity.class);
+
             }
         });
     }
@@ -128,4 +132,6 @@ public class SplashActivity extends BaseActivity {
         super.onDestroy();
         ad.stop();
     }
+
+
 }

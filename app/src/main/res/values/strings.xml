@@ -2,6 +2,11 @@
     <string name="app_name">Gank</string>
     <string name="copyright">by:v1ncent</string>
 
+    <string name="daily">首页</string>
+    <string name="follow">关注</string>
+    <string name="find">发现</string>
+    <string name="me">我的</string>
+
     <!--网络连接失败错误-->
     <string name="no_internet">无网络连接~！</string>
     <string name="generic_server_down">连接服务器失败~！</string>
@@ -48,5 +53,8 @@
     <string name="pupop_share">分享</string>
     <string name="pupop_link">复制链接</string>
     <string name="pupop_web">浏览器打开</string>
+    <string name="pupop_refresh">刷新页面</string>
+
+    <string name="search">搜索</string>
 
 </resources>

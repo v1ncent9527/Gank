@@ -125,11 +125,21 @@ public class DailyFragment extends BaseFragment {
         initData(true);
         return view;
     }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            setStatusBarColor(getResources().getColor(R.color.white));
+            //TODO now visible to user
+        } else {
+            //TODO now invisible to user
+        }
+    }
 
     private void initView() {
+        setStatusBarColor(getResources().getColor(R.color.white));
         loadingView.start();
         dailySpringView.setEnable(false);
-        setStatusBarColor(getResources().getColor(R.color.white), 32);
 
         dailySpringView.setType(SpringView.Type.FOLLOW);
         dailySpringView.setListener(new SpringView.OnFreshListener() {

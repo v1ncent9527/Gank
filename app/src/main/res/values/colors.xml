@@ -18,6 +18,7 @@
     <color name="base_bg">#f4f4f4</color>
     <color name="line">#cdcdcd</color>
     <color name="title_text">#444444</color>
+    <color name="title_bg">#393a3f</color>
     <color name="gray_1">#bfbfbf</color>
     <color name="splash_bg">#2E2E2E</color>
 
@@ -26,5 +27,6 @@
     <color name="gray_b2">#b2b2b2</color>
     <color name="gray_9c">#9c9c9c</color>
     <color name="gray_8a">#8a8a8a</color>
+
 
 </resources>

@@ -68,8 +68,8 @@ public class SettingActivity extends BaseActivity {
     }
 
     private void initView() {
+        setStatusBarColor(getResources().getColor(R.color.tab_4));
         titleText.setText("通用设置");
-        setStatusBarColor(getResources().getColor(R.color.white), 32);
         OverScrollDecoratorHelper.setUpOverScroll(settingRoot);//设置滑动
 
     }

@@ -57,6 +57,15 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      * 设置状态栏颜色
      *
      * @param color
+     */
+    protected void setStatusBarColor(@ColorInt int color) {
+        setStatusBarColor(color, 32);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param color
      * @param statusBarAlpha 透明度
      */
     public void setStatusBarColor(@ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {

@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_4"
+            android:paddingBottom="@dimen/padding_12"
             android:paddingLeft="@dimen/padding_5"
             android:paddingTop="@dimen/img_12">
 
@@ -121,5 +121,35 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_14" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_1px"
+            android:background="@color/gray_8a" />
+
+        <LinearLayout
+            android:id="@+id/pupop_refresh"
+            android:layout_width="@dimen/padding_100"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/padding_4"
+            android:paddingLeft="@dimen/padding_5"
+            android:paddingTop="@dimen/img_12">
+
+            <ImageView
+                android:layout_width="@dimen/img_18"
+                android:layout_height="@dimen/img_18"
+                android:src="@mipmap/pupop_refresh" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_8"
+                android:text="@string/pupop_refresh"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
