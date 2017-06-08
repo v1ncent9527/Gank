@@ -54,7 +54,6 @@ public class MeFragment extends BaseFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_me, null);
         ButterKnife.bind(this, view);
         initView();
-        showSuccess("MeFragment");
         return view;
     }
 

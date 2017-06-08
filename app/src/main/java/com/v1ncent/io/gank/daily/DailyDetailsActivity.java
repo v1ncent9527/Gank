@@ -17,12 +17,12 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.app.BaseActivity;
-import com.v1ncent.io.gank.daily.widget.WebHeader;
 import com.v1ncent.io.gank.ui.LoadingWebView;
 import com.v1ncent.io.gank.widget.popup.amin.AnimEnter;
 import com.v1ncent.io.gank.widget.popup.amin.AnimExit;
 import com.v1ncent.io.gank.widget.popup.v1ncentPupop;
 import com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView;
+import com.v1ncent.io.gank.widget.refreshPlusLoadmore.WebHeader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

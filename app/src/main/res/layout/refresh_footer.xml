@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <com.v1ncent.io.gank.widget.loadingview.AVLoadingIndicatorView
+            android:id="@+id/avLoadingIndicatorView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"
+            app:indicatorColor="@color/tab_2"/>
+
+        <TextView
+            android:id="@+id/default_footer_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="加载更多"
+            android:textColor="@color/gray_8a" />
+    </RelativeLayout>
+
+</LinearLayout>

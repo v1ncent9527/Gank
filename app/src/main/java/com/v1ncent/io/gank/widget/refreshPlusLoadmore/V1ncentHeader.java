@@ -1,4 +1,4 @@
-package com.v1ncent.io.gank.daily.widget;
+package com.v1ncent.io.gank.widget.refreshPlusLoadmore;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,13 +8,12 @@ import android.widget.ImageView;
 
 import com.v1ncent.io.gank.R;
 import com.v1ncent.io.gank.widget.loadingview.SlackLoadingView;
-import com.v1ncent.io.gank.widget.refreshPlusLoadmore.BaseHeader;
 
 /**
- * Created by v1ncent on 2017/4/28.
+ * Created by v1ncent on 2017/5/24.
  */
 
-public class DailyHeader extends BaseHeader {
+public class V1ncentHeader extends BaseHeader {
     private Context context;
     private ImageView headerLogo;
     private int logoSrc;
@@ -28,12 +27,12 @@ public class DailyHeader extends BaseHeader {
         headerLogo = (ImageView) view.findViewById(R.id.ali_header_logo);
         slackLoadingView = (SlackLoadingView) view.findViewById(R.id.loadingView);
         frame = view.findViewById(R.id.ali_frame);
-        if(logoSrc!=0) headerLogo.setImageResource(logoSrc);
+        if (logoSrc != 0) headerLogo.setImageResource(logoSrc);
 
         return view;
     }
 
-    public DailyHeader(Context context, int logoSrc) {
+    public V1ncentHeader(Context context, int logoSrc) {
         this.context = context;
         this.logoSrc = logoSrc;
     }

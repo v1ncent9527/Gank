@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/pregress_color"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_12"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/padding_8"
+                android:paddingLeft="@dimen/padding_12"
+                android:paddingTop="@dimen/padding_8">
+
+                <com.v1ncent.io.gank.widget.CircleImageView
+                    android:id="@+id/item_head"
+                    android:layout_width="@dimen/img_40"
+                    android:layout_height="@dimen/img_40"
+                    android:src="@mipmap/head_default"
+                    app:border_color="@color/white"
+                    app:border_width="@dimen/padding_6" />
+
+                <TextView
+                    android:id="@+id/item_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/padding_16"
+                    android:text="v1ncent"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_4"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12">
+
+
+                <TextView
+                    android:id="@+id/item_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="封装了大量的常用的方法，"
+                    android:textColor="@color/title_text"
+                    android:textSize="@dimen/text_15" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/img_16"
+                android:layout_marginTop="@dimen/padding_8"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_12">
+
+                <ImageView
+                    android:layout_width="@dimen/img_11"
+                    android:layout_height="@dimen/img_11"
+                    android:src="@mipmap/ic_catetory" />
+
+                <TextView
+                    android:id="@+id/item_random_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_4"
+                    android:text="1190"
+                    android:textColor="@color/gray_1"
+                    android:textSize="@dimen/text_12" />
+
+                <ImageView
+                    android:layout_width="@dimen/img_13"
+                    android:layout_height="@dimen/img_13"
+                    android:layout_marginLeft="@dimen/padding_16"
+                    android:src="@mipmap/ic_date" />
+
+                <TextView
+                    android:id="@+id/item_random_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_4"
+                    android:text="2017/10/23"
+                    android:textColor="@color/gray_1"
+                    android:textSize="@dimen/text_12" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/item_random_img"
+            android:layout_width="@dimen/padding_88"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/padding_12"
+            android:layout_marginRight="@dimen/padding_12"
+            android:layout_marginTop="@dimen/padding_12"
+            android:scaleType="center"
+            android:src="@color/white" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/item_dvider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_1px"
+        android:layout_marginLeft="@dimen/padding_12"
+        android:background="@color/line" />
+</LinearLayout>

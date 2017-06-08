@@ -28,5 +28,13 @@
     <color name="gray_9c">#9c9c9c</color>
     <color name="gray_8a">#8a8a8a</color>
 
+    <color name="category_0">#75c858</color>
+    <color name="category_1">#BF009bfd</color>7171C6
+    <color name="category_2">#65d6f5</color>
+    <color name="category_3">#BFffbe00</color>
+    <color name="category_4">#BFec3679</color>
+    <color name="category_5">#BF5eb9ad</color>
+    <color name="category_6">#BF7171C6</color>
+    <color name="category_7">#C6E2FF</color>
 
 </resources>

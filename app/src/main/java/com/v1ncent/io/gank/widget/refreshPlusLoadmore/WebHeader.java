@@ -1,4 +1,4 @@
-package com.v1ncent.io.gank.daily.widget;
+package com.v1ncent.io.gank.widget.refreshPlusLoadmore;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.v1ncent.io.gank.R;
-import com.v1ncent.io.gank.widget.refreshPlusLoadmore.BaseHeader;
 
 /**
  * Created by v1ncent on 2017/5/8.

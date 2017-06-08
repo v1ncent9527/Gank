@@ -32,7 +32,6 @@ import com.v1ncent.io.gank.daily.adapter.ModuleVideoAdapter;
 import com.v1ncent.io.gank.daily.pojo.DayDateResult;
 import com.v1ncent.io.gank.daily.pojo.HistoryDateResult;
 import com.v1ncent.io.gank.daily.pojo.WeatherResult;
-import com.v1ncent.io.gank.daily.widget.DailyHeader;
 import com.v1ncent.io.gank.utils.DateFormatUtils;
 import com.v1ncent.io.gank.utils.HttpClientUtils;
 import com.v1ncent.io.gank.utils.impl.OnRecyclerViewListener;
@@ -40,6 +39,7 @@ import com.v1ncent.io.gank.utils.impl.VolleyErrorHelper;
 import com.v1ncent.io.gank.utils.impl.VolleyListenerInterface;
 import com.v1ncent.io.gank.widget.loadingview.SlackLoadingView;
 import com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView;
+import com.v1ncent.io.gank.widget.refreshPlusLoadmore.V1ncentHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +120,6 @@ public class DailyFragment extends BaseFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_daily, null);
         ButterKnife.bind(this, view);
         context = getActivity();
-        showSuccess(TAG);
         initView();
         initData(true);
         return view;
@@ -130,6 +129,7 @@ public class DailyFragment extends BaseFragment {
         super.onHiddenChanged(hidden);
         if (!hidden) {
             setStatusBarColor(getResources().getColor(R.color.white));
+
             //TODO now visible to user
         } else {
             //TODO now invisible to user
@@ -172,7 +172,7 @@ public class DailyFragment extends BaseFragment {
             public void onLoadmore() {
             }
         });
-        dailySpringView.setHeader(new DailyHeader(getActivity(), R.mipmap.ali));   //参数为：logo图片资源，是否显示文字
+        dailySpringView.setHeader(new V1ncentHeader(getActivity(), R.mipmap.ali));   //参数为：logo图片资源，是否显示文字
 
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "thinfont-thin.ttf"); // create a typeface from the raw ttf
         dailyDate.setTypeface(typeface); // apply the typeface to the textview

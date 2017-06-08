@@ -4,4 +4,93 @@
     android:layout_height="match_parent"
     android:background="@color/base_bg">
 
+    <com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView
+        android:id="@+id/find_spring_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/bottomtabstrip_height"
+        android:layout_weight="1"
+        android:background="@color/base_bg">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_find"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_12"
+                    android:background="@color/white"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_1px"
+                    android:layout_marginTop="@dimen/padding_16"
+                    android:background="@color/line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_48"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_16"
+                    android:paddingRight="@dimen/padding_16">
+
+                    <ImageView
+                        android:layout_width="@dimen/img_24"
+                        android:layout_height="@dimen/img_24"
+                        android:src="@mipmap/ic_random2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding_16"
+                        android:layout_weight="1"
+                        android:text="随机干货"
+                        android:textColor="@color/title_text"
+                        android:textSize="@dimen/text_14" />
+
+                    <ImageView
+                        android:id="@+id/refresh_find"
+                        android:layout_width="@dimen/img_48"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/padding_12"
+                        android:src="@mipmap/ic_refresh" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_1px"
+                    android:background="@color/line" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycle_random"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </ScrollView>
+    </com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView>
+
+    <include layout="@layout/layout_title" />
 </FrameLayout>

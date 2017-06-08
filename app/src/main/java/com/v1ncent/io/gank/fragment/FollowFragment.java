@@ -22,7 +22,6 @@ public class FollowFragment extends BaseFragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_follow, null);
         ButterKnife.bind(this, view);
         initView();
-        showSuccess("FollowFragment");
         return view;
     }
 
