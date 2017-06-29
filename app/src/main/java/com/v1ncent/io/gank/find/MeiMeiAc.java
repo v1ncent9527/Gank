@@ -1,9 +1,10 @@
 package com.v1ncent.io.gank.find;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -77,13 +78,16 @@ public class MeiMeiAc extends BaseActivity {
         setStatusBarColor(getResources().getColor(R.color.tab_2));
         titleText.setText("福利");
         title.setBackgroundColor(getResources().getColor(R.color.tab_2));
-        recycleMeimei.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recycleMeimei.setLayoutManager(new GridLayoutManager(context, 2));
         meimeiAdapter = new MeimeiAdapter(context, imhUrls);
         recycleMeimei.setAdapter(meimeiAdapter);
         meimeiAdapter.addItemClickListener(new OnRecyclerViewListener() {
             @Override
             public void onItemClickListener(int position) {
-
+                Intent intent = new Intent(context, PhotoShowAc.class);
+                intent.putExtra("photo_url", imhUrls.get(position));
+                startActivity(intent);
+                mSwipeBackHelper.executeForwardAnim();
             }
 
             @Override

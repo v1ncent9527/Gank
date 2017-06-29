@@ -8,6 +8,7 @@ package com.v1ncent.io.gank.widget;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
@@ -22,6 +23,7 @@ import com.v1ncent.io.gank.R;
  * 加载提醒对话框
  */
 public class LoadingDialog extends ProgressDialog {
+    private LoadingDialog loadingDialog;
     private ObjectAnimator load;
     private String loadingMsg;
     private ImageView loadImg;
@@ -41,7 +43,7 @@ public class LoadingDialog extends ProgressDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        loadingDialog = this;
         init(getContext(), loadingMsg);
     }
 
@@ -106,10 +108,18 @@ public class LoadingDialog extends ProgressDialog {
      * @param success
      */
     public void success(String success) {
-        load.cancel();
+        if (null != load) {
+            load.cancel();
+        }
         ShowProgressOrN(false);
         loadStatue.setImageResource(R.mipmap.dialog_succeed);
         dialogMsg.setText(success);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.cancel();
+            }
+        }, 1000);
     }
 
     /**
@@ -118,10 +128,18 @@ public class LoadingDialog extends ProgressDialog {
      * @param failed
      */
     public void failed(String failed) {
-        load.cancel();
+        if (null != load) {
+            load.cancel();
+        }
         ShowProgressOrN(false);
         loadStatue.setImageResource(R.mipmap.dialog_failed);
         dialogMsg.setText(failed);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.cancel();
+            }
+        }, 1000);
     }
 
     private void ShowProgressOrN(boolean show) {

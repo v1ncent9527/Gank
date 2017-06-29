@@ -4,19 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/base_bg">
 
-    <com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView
-        android:id="@+id/find_spring_view"
+    <ImageView
+        android:id="@+id/photo_show"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/bottomtabstrip_height"
-        android:layout_weight="1"
-        android:background="@color/base_bg">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_meimei"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </com.v1ncent.io.gank.widget.refreshPlusLoadmore.SpringView>
+        android:scaleType="fitCenter"/>
 
     <include layout="@layout/layout_title" />
 
